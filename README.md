@@ -1,10 +1,10 @@
 <pre>
 
 Project .....: JAPOLabs_JavaLibrary_Classic
-Summary .....: Template for Java Application Projects on NetBeans IDE
+Summary .....: Useful and common methods for programming exercises
 Creation ....: 21/08/2017
-Modification : 
-Version .....: 0.1.0
+Modification : 02/09/2017
+Version .....: 0.1.1
 Author ......: José A. Pacheco Ondoño - joanpaon@gmail.com
 Platform ....: Java 8
 IDE .........: NetBeans 8.2
