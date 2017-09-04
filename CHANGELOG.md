@@ -1,5 +1,12 @@
 <pre>
 
+Version 0.1.2
+=============
+> Constants LnF changed
+> Nethods changed
+  - establecerLnF
+---
+
 Version 0.1.1
 =============
 > Nethods added
