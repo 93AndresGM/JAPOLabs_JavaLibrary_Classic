@@ -1,5 +1,10 @@
 <pre>
 
+Version 0.1.3
+=============
+> UtilesDNI fixed and improved
+---
+
 Version 0.1.2
 =============
 > Constants LnF changed
