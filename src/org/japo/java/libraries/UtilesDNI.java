@@ -45,19 +45,23 @@ public class UtilesDNI {
 
         // Validar Formato DNI
         if (!UtilesValidacion.validarDato(dni, ER_DNI)) {
-            throw new Exception("Formato erróneo de DNI");
+            throw new Exception("ERROR: Formato erróneo de DNI");
         }
 
         // Extraer Prefijo Numérico
         String prefijo = "";
-        if (dni.charAt(0) == 'X') {
-            prefijo += '0' + dni.substring(1, dni.length() - 1);
-        } else if (dni.charAt(0) == 'Y') {
-            prefijo += '1' + dni.substring(1, dni.length() - 1);
-        } else if (dni.charAt(0) == 'Z') {
-            prefijo += '2' + dni.substring(1, dni.length() - 1);
-        } else {
-            prefijo += dni.substring(0, dni.length() - 1);
+        switch (dni.charAt(0)) {
+            case 'X':
+                prefijo += '0' + dni.substring(1, dni.length() - 1);
+                break;
+            case 'Y':
+                prefijo += '1' + dni.substring(1, dni.length() - 1);
+                break;
+            case 'Z':
+                prefijo += '2' + dni.substring(1, dni.length() - 1);
+                break;
+            default:
+                prefijo += dni.substring(0, dni.length() - 1);
         }
 
         // Convierte el texto a entero
@@ -72,7 +76,7 @@ public class UtilesDNI {
 
         // Validar Formato DNI
         if (!UtilesValidacion.validarDato(dni, ER_DNI)) {
-            throw new Exception("Formato erróneo de DNI");
+            throw new Exception("ERROR: Formato erróneo de DNI");
         }
 
         // Devuelve Letra
@@ -95,7 +99,7 @@ public class UtilesDNI {
             // Análisis Concordancia
             dniOK = calcularLetraDNI(numero) == letra;
         } catch (Exception e) {
-            System.out.println("ERROR: Formato DNI incorrecto");
+            System.out.println("ERROR: Formato erróneo de DNI");
         }
         
         // Resultado del análisis

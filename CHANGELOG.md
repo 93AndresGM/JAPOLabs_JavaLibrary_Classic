@@ -1,4 +1,9 @@
 <pre>
+Version 0.1.4
+=============
+> Resource Packages Removed
+> Windows LnF Profiles Updated
+---
 
 Version 0.1.3
 =============
