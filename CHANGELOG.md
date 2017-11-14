@@ -1,4 +1,11 @@
 <pre>
+
+Version 0.1.5
+=============
+> Added some methods
+> Some minor refactorizations
+---
+
 Version 0.1.4
 =============
 > Resource Packages Removed
