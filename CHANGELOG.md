@@ -1,40 +1,7 @@
 <pre>
 
-Version 0.1.5
-=============
-> Added some methods
-> Some minor refactorizations
----
-
-Version 0.1.4
-=============
-> Resource Packages Removed
-> Windows LnF Profiles Updated
----
-
-Version 0.1.3
-=============
-> UtilesDNI fixed and improved
----
-
-Version 0.1.2
-=============
-> Constants LnF changed
-> Nethods changed
-  - establecerLnF
----
-
-Version 0.1.1
-=============
-> Nethods added
-  - validarDatoLista
-  - validarCampoTextoLista
----
-
-Version 0.1.0
-=============
-> Most useful and common methods from my programming exercises gathered together
-  and structured in thematic classes.
----
+> Moved some methods from UtilesFecha/UtilesDNI to UtilesValidacion
+> Added some methods to UtilesEntrada
+> Reformated UtilesPrimitivos code
 
 </pre>
