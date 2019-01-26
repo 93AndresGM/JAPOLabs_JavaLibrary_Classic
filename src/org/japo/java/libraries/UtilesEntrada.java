@@ -104,14 +104,82 @@ public class UtilesEntrada {
         return dato;
     }
 
-    // Consola >> Número de DNI
-    public static final int leerNumeroDNI(String msgUsr, String msgErr) {
-        return leerEntero(msgUsr, msgErr, UtilesDNI.NUM_MIN, UtilesDNI.NUM_MAX);
+    // Consola >> Real
+    public static final double leerReal(String msgUsr, String msgErr) {
+        // Dato a introducir
+        double dato = 0;
+
+        // Proceso de lectura
+        boolean lecturaOK = false;
+        do {
+            try {
+                // Entrada dato
+                System.out.print(msgUsr);
+                dato = SCN.nextDouble();
+
+                // Marca el semáforo
+                lecturaOK = true;
+            } catch (Exception e) {
+                System.out.println(msgErr);
+            } finally {
+                SCN.nextLine();
+            }
+        } while (!lecturaOK);
+
+        // Devolver dato
+        return dato;
     }
 
-    // Consola >> Carácter de control de DNI
-    public static final char leerControlDNI(String msgUsr, String msgErr) {
-        return leerCaracter(msgUsr, msgErr);
+    // Consola >> Real [min .. max]
+    public static final double leerReal(String msgUsr, String msgErr, double min, double max) {
+        // Numero a devolver
+        double dato;
+
+        // Semaforo validacion
+        boolean rangoOK;
+
+        // Bucle Validacion
+        do {
+            // Introducir Entero
+            dato = leerReal(msgUsr, msgErr);
+
+            // Validar Entero
+            rangoOK = dato >= min && dato <= max;
+
+            // Mensaje de error
+            if (!rangoOK) {
+                System.out.println(msgErr);
+            }
+        } while (!rangoOK);
+
+        // Devolver número
+        return dato;
+    }
+
+    // Consola >> Real [Lista posibles Valores]
+    public static final double leerReal(String msgUsr, String msgErr, double lista[]) {
+        // Numero a devolver
+        double dato;
+
+        // Semaforo validacion
+        boolean datoOK;
+
+        // Bucle Validacion
+        do {
+            // Introducir Entero
+            dato = UtilesEntrada.leerEntero(msgUsr, msgErr);
+
+            // Validar Entero
+            datoOK = UtilesArrays.buscar(lista, dato) > -1;
+
+            // Mensaje de error
+            if (!datoOK) {
+                System.out.println(msgErr);
+            }
+        } while (!datoOK);
+
+        // Devolver número
+        return dato;
     }
 
     // Consola >> Carácter
@@ -138,8 +206,8 @@ public class UtilesEntrada {
         return dato;
     }
 
-    // Consola >> Opción [Lista posibles Opciones]
-    public static final char leerOpcion(String opciones, String msgUsr, String msgErr) {
+    // Consola >> Carácter [Lista posibles Opciones]
+    public static final char leerCaracter(String msgUsr, String msgErr, String opciones) {
         // Dato a introducir
         char dato = 0;
 
@@ -166,34 +234,30 @@ public class UtilesEntrada {
         return dato;
     }
 
-    // Consola > DNI (Completo)
-    public static final String leerDNI(String msgNum, String msgCtr, String msgErr) {
-        // Mensajes
-        final String MSG_ERR = "ERROR: DNI incorrecto";
+    // Consola >> Carácter [min .. max]
+    public static final char leerCaracter(String msgUsr, String msgErr, char min, char max) {
+        // Dato a introducir
+        char dato;
 
-        // Variables 
-        int num;
-        char ctr;
+        // Semaforo validacion
+        boolean rangoOK;
 
-        // Proceso de entrada
-        boolean dniOK;
-
+        // Bucle Validacion
         do {
-            // Componentes del DNI
-            num = leerNumeroDNI(msgNum, msgErr);
-            ctr = leerControlDNI(msgCtr, msgErr);
+            // Introducir Entero
+            dato = leerCaracter(msgUsr, msgErr);
 
-            // Valida DNI
-            dniOK = UtilesValidacion.validarDNI(num, ctr);
+            // Validar Entero
+            rangoOK = dato >= min && dato <= max;
 
-            // DNI Erróneo
-            if (!dniOK) {
-                System.out.println(MSG_ERR);
+            // Mensaje de error
+            if (!rangoOK) {
+                System.out.println(msgErr);
             }
-        } while (!dniOK);
+        } while (!rangoOK);
 
-        // Devolver dato
-        return "" + num + ctr;
+        // Devolver número
+        return dato;
     }
 
     // Consola >> Texto

@@ -20,7 +20,12 @@ package org.japo.java.libraries;
  * @author José A. Pacheco Ondoño - joanpaon@gmail.com
  */
 public final class UtilesEMail {
+
     // Expresión Regular
     public static final String ER_EMAIL = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*";
 
+    // Validar email
+    public static final boolean validarEMail(String email) {
+        return UtilesValidacion.validar(email, ER_EMAIL);
+    }
 }

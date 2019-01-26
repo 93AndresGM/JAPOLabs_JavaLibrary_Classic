@@ -124,8 +124,32 @@ public final class UtilesArrays {
         }
     }
 
-    // Búsqueda Simple - int
+    // Búsqueda Simple - Enteros
     public static final int buscar(int[] listaDatos, int clave) {
+        // Marcador de posición
+        int posicion = 0;
+
+        // Semáforo de Proceso de Búsqueda
+        boolean finBusquedaOK = false;
+
+        // Proceso de búsqueda
+        do {
+            if (posicion >= listaDatos.length) {
+                finBusquedaOK = true;
+                posicion = -1;
+            } else if (listaDatos[posicion] == clave) {
+                finBusquedaOK = true;
+            } else {
+                posicion++;
+            }
+        } while (!finBusquedaOK);
+
+        // Posición de la clave en el array
+        return posicion;
+    }
+
+    // Búsqueda Simple - Reales
+    public static final int buscar(double[] listaDatos, double clave) {
         // Marcador de posición
         int posicion = 0;
 
@@ -201,8 +225,8 @@ public final class UtilesArrays {
         }
     }
 
-    // Desordenar - caracter
-    public static final void desordenar(char[] lista) {
+    // Desordenar Lista - caracter
+    public static final char[] desordenar(char[] lista) {
         for (int i = 0; i < lista.length; i++) {
             int posRnd = RND.nextInt(lista.length);
 
@@ -210,10 +234,12 @@ public final class UtilesArrays {
             lista[posRnd] = lista[i];
             lista[i] = aux;
         }
+        
+        return lista;
     }
 
-    // Desordenar - entero
-    public static final void desordenar(int[] lista) {
+    // Desordenar Lista - entero
+    public static final int[] desordenar(int[] lista) {
         for (int i = 0; i < lista.length; i++) {
             int posRnd = RND.nextInt(lista.length);
 
@@ -221,38 +247,46 @@ public final class UtilesArrays {
             lista[posRnd] = lista[i];
             lista[i] = aux;
         }
+        
+        return lista;
     }
 
     // Desordenar - real
-    public static final void desordenar(double[] a) {
-        for (int i = 0; i < a.length; i++) {
-            int posRnd = RND.nextInt(a.length);
+    public static final double[] desordenar(double[] lista) {
+        for (int i = 0; i < lista.length; i++) {
+            int posRnd = RND.nextInt(lista.length);
 
-            double aux = a[posRnd];
-            a[posRnd] = a[i];
-            a[i] = aux;
+            double aux = lista[posRnd];
+            lista[posRnd] = lista[i];
+            lista[i] = aux;
         }
+        
+        return lista;
     }
 
     // Desordenar - boolean
-    public static final void desordenar(boolean[] a) {
-        for (int i = 0; i < a.length; i++) {
-            int posRnd = RND.nextInt(a.length);
+    public static final boolean[] desordenar(boolean[] lista) {
+        for (int i = 0; i < lista.length; i++) {
+            int posRnd = RND.nextInt(lista.length);
 
-            boolean aux = a[posRnd];
-            a[posRnd] = a[i];
-            a[i] = aux;
+            boolean aux = lista[posRnd];
+            lista[posRnd] = lista[i];
+            lista[i] = aux;
         }
+        
+        return lista;
     }
 
     // Desordenar - String
-    public static final void desordenar(String[] a) {
-        for (int i = 0; i < a.length; i++) {
-            int posRnd = RND.nextInt(a.length);
+    public static final String[] desordenar(String[] lista) {
+        for (int i = 0; i < lista.length; i++) {
+            int posRnd = RND.nextInt(lista.length);
 
-            String aux = a[posRnd];
-            a[posRnd] = a[i];
-            a[i] = aux;
+            String aux = lista[posRnd];
+            lista[posRnd] = lista[i];
+            lista[i] = aux;
         }
+        
+        return lista;
     }
 }

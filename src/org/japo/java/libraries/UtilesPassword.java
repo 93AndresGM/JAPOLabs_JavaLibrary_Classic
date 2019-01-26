@@ -23,6 +23,10 @@ import java.util.Random;
  */
 public final class UtilesPassword {
 
+    // Longitud Contraseña
+    public static final int LONG_PASS_MIN = 6;
+    public static final int LONG_PASS_MAX = 24;
+
     // Categorias de caracteres
     public static final int CAT_MIN = 0;
     public static final int CAT_MAY = 1;
@@ -47,84 +51,48 @@ public final class UtilesPassword {
     // Sistema aleatorio
     public static final Random RND = new Random();
 
-    public static final String generarPassword(int longitud) {
-        // Semáforos
-        boolean minOK = false;      // Cat 0
-        boolean mayOK = false;      // Cat 1
-        boolean numOK = false;      // Cat 2
-        boolean punOK = false;      // Cat 3
-
-        // Password a generar
-        String password = "";
-
-        // Bucle generador
-        for (int posAct = 0; posAct < longitud; posAct++) {
-            // Generar categoria
-//            int catActual = generarCategoria(longitud, posAct, minOK, mayOK, numOK, punOK);
-            int catActual = generarCategoria(NUM_CAT);
-
-            // Caracter actual
-            char carActual;
-
-            // Analizar categoria actual 
-            switch (catActual) {
-                case CAT_MIN:
-                    minOK = true;
-                    carActual = generarCaracter(CAR_MIN_STR);
-                    password += carActual;
-                    break;
-                case CAT_MAY:
-                    mayOK = true;
-                    carActual = generarCaracter(CAR_MAY_STR);
-                    password += carActual;
-                    break;
-                case CAT_NUM:
-                    numOK = true;
-                    carActual = generarCaracter(CAR_NUM_STR);
-                    password += carActual;
-                    break;
-                case CAT_PUN:
-                    punOK = true;
-                    carActual = generarCaracter(CAR_PUN_STR);
-                    password += carActual;
-            }
-        }
-
-        // Devolver password
-        return password;
+    public static final char[] generarPassword(int longPass) {
+        return validarLongPass(longPass) ? generarPassword(new char[longPass]) : null;
     }
 
     // Genera Password (min + may + num + pun)
-    public static final void generarPassword(char[] pass) {
-        // Manual
-        pass[0] = generarCaracter(CAR_MIN_STR);
-        pass[1] = generarCaracter(CAR_MAY_STR);
-        pass[2] = generarCaracter(CAR_NUM_STR);
-        pass[3] = generarCaracter(CAR_PUN_STR);
+    public static final char[] generarPassword(char[] pass) {
+        if (validarLongPass(pass.length)) {
+            // Diferentes Categorias - Manual
+            pass[CAT_MIN] = generarCaracter(CAR_MIN_STR);
+            pass[CAT_MAY] = generarCaracter(CAR_MAY_STR);
+            pass[CAT_NUM] = generarCaracter(CAR_NUM_STR);
+            pass[CAT_PUN] = generarCaracter(CAR_PUN_STR);
 
-        // Bucle generador
-        for (int posAct = NUM_CAT; posAct < pass.length; posAct++) {
-            // Generar categoria
-            int catAct = generarCategoria(NUM_CAT);
+            // Bucle generador - A partir de Posicion 5
+            for (int posAct = NUM_CAT; posAct < pass.length; posAct++) {
+                // Generar categoria
+                int catAct = RND.nextInt(NUM_CAT);
 
-            // Analizar categoria actual 
-            switch (catAct) {
-                case CAT_MIN:
-                    pass[posAct] = generarCaracter(CAR_MIN);
-                    break;
-                case CAT_MAY:
-                    pass[posAct] = generarCaracter(CAR_MAY);
-                    break;
-                case CAT_NUM:
-                    pass[posAct] = generarCaracter(CAR_NUM);
-                    break;
-                case CAT_PUN:
-                    pass[posAct] = generarCaracter(CAR_PUN);
+                // Analizar categoria actual 
+                switch (catAct) {
+                    case CAT_MIN:
+                        pass[posAct] = generarCaracter(CAR_MIN);
+                        break;
+                    case CAT_MAY:
+                        pass[posAct] = generarCaracter(CAR_MAY);
+                        break;
+                    case CAT_NUM:
+                        pass[posAct] = generarCaracter(CAR_NUM);
+                        break;
+                    case CAT_PUN:
+                        pass[posAct] = generarCaracter(CAR_PUN);
+                }
             }
+
+            // Desordenar Array
+            UtilesArrays.desordenar(pass);
+        } else {
+            pass = null;
         }
 
-        // Desordenar Array
-        UtilesArrays.desordenar(pass);
+        // Devuelve el array
+        return pass;
     }
 
     public static final char generarCaracter(String lista) {
@@ -135,7 +103,7 @@ public final class UtilesPassword {
         return lista[RND.nextInt(lista.length)];
     }
 
-    public static final int generarCategoria(int numCat) {
-        return RND.nextInt(numCat);
+    public static final boolean validarLongPass(int longPass) {
+        return longPass >= LONG_PASS_MIN && longPass <= LONG_PASS_MAX;
     }
 }

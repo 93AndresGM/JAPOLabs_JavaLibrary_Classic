@@ -20,7 +20,12 @@ package org.japo.java.libraries;
  * @author José A. Pacheco Ondoño - joanpaon@gmail.com
  */
 public final class UtilesURL {
+
     // Expresión Regular
     public static final String ER_URL = "^(https?://)?(([\\w!~*'().&=+$%-]+: )?[\\w!~*'().&=+$%-]+@)?(([0-9]{1,3}\\.){3}[0-9]{1,3}|([\\w!~*'()-]+\\.)*([\\w^-][\\w-]{0,61})?[\\w]\\.[a-z]{2,6})(:[0-9]{1,4})?((/*)|(/+[\\w!~*'().;?:@&=+$,%#-]+)+/*)$";
 
+    // Validar URL
+    public static final boolean validarURL(String url) {
+        return UtilesValidacion.validar(url, ER_URL);
+    }
 }
