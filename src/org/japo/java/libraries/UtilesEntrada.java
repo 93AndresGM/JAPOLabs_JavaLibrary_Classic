@@ -26,7 +26,7 @@ public class UtilesEntrada {
     // Scanner --- > Entrada de acentos con Windows
     public static final Scanner SCN = new Scanner(System.in, "ISO-8859-1");
 
-    // Devuelve un entero introducido por teclado
+    // Consola >> Entero
     public static final int leerEntero(String msgUsr, String msgErr) {
         // Dato a introducir
         int dato = 0;
@@ -52,7 +52,7 @@ public class UtilesEntrada {
         return dato;
     }
 
-    // Devuelve un entero entre limites introducido por teclado
+    // Consola >> Entero [min .. max]
     public static final int leerEntero(String msgUsr, String msgErr, int min, int max) {
         // Numero a devolver
         int dato;
@@ -78,7 +78,7 @@ public class UtilesEntrada {
         return dato;
     }
 
-    // Devuelve un entero introducido por teclado de entre una lista de posibles valores
+    // Consola >> Entero [Lista posibles Valores]
     public static final int leerEntero(String msgUsr, String msgErr, int lista[]) {
         // Numero a devolver
         int dato;
@@ -104,12 +104,17 @@ public class UtilesEntrada {
         return dato;
     }
 
-    // Devuelve un número de DNI
+    // Consola >> Número de DNI
     public static final int leerNumeroDNI(String msgUsr, String msgErr) {
         return leerEntero(msgUsr, msgErr, UtilesDNI.NUM_MIN, UtilesDNI.NUM_MAX);
     }
 
-    // Devuelve un caracter introducido por teclado
+    // Consola >> Carácter de control de DNI
+    public static final char leerControlDNI(String msgUsr, String msgErr) {
+        return leerCaracter(msgUsr, msgErr);
+    }
+
+    // Consola >> Carácter
     public static final char leerCaracter(String msgUsr, String msgErr) {
         // Dato a introducir
         char dato = 0;
@@ -133,7 +138,7 @@ public class UtilesEntrada {
         return dato;
     }
 
-    // Devuelve una opción
+    // Consola >> Opción [Lista posibles Opciones]
     public static final char leerOpcion(String opciones, String msgUsr, String msgErr) {
         // Dato a introducir
         char dato = 0;
@@ -161,12 +166,7 @@ public class UtilesEntrada {
         return dato;
     }
 
-    // Devuelve un caracter de control de DNI
-    public static final char leerControlDNI(String msgUsr, String msgErr) {
-        return leerCaracter(msgUsr, msgErr);
-    }
-
-    // Devuelve un DNI
+    // Consola > DNI (Completo)
     public static final String leerDNI(String msgNum, String msgCtr, String msgErr) {
         // Mensajes
         final String MSG_ERR = "ERROR: DNI incorrecto";
@@ -196,7 +196,7 @@ public class UtilesEntrada {
         return "" + num + ctr;
     }
 
-    // Devuelve el Texto introducido
+    // Consola >> Texto
     public static final String leerTexto(String msgUsr) {
         System.out.print(msgUsr);
         return SCN.nextLine();

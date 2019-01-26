@@ -15,6 +15,7 @@
  */
 package org.japo.java.libraries;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -66,5 +67,46 @@ public class UtilesSorteos {
 
         // Devolver Apuesta
         return apuesta;
+    }
+
+    public static final ArrayList<Integer> generarApuestaPrimitivaList() {
+        // Definir Apuesta
+        ArrayList<Integer> apuesta = new ArrayList<>();
+
+        // Definir bombo
+        ArrayList<Integer> bombo = generarBomboPrimitivaList();
+
+        // Generar apuesta
+        for (int i = 0; i < LONGITUD_APUESTA_PRIMITIVA; i++) {
+            apuesta.add(bombo.remove(RND.nextInt(bombo.size())));
+        }
+
+        // Devolver Apuesta
+        return apuesta;
+    }
+
+    public static final ArrayList<Integer> generarBomboPrimitivaList() {
+        // Definir bombo
+        ArrayList<Integer> bombo = new ArrayList<>();
+
+        // Llenar bombo - Primer Número: 1
+        for (int i = 0; i < LONGITUD_BOMBO_PRIMITIVA; i++) {
+            bombo.add(i, i + 1);
+        }
+
+        // Devolver Bombo
+        return bombo;
+    }
+
+    public static final void ordenarBurbuja(int[] lista) {
+        for (int i = 0; i < lista.length - 1; i++) {
+            for (int j = 0; j < lista.length - i - 1; j++) {
+                if (lista[j + 1] < lista[j]) {
+                    int aux = lista[j + 1];
+                    lista[j + 1] = lista[j];
+                    lista[j] = aux;
+                }
+            }
+        }
     }
 }
