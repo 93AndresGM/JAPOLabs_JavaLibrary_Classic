@@ -16,6 +16,7 @@
 package org.japo.java.libraries;
 
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -28,7 +29,7 @@ import javax.swing.JTextField;
 public final class UtilesValidacion {
 
     // Dato + Expresión Regular
-    public static final boolean validarDato(String dato, String er) {
+    public static final boolean validar(String dato, String er) {
         // Semáforo de validación
         boolean testOK = false;
 
@@ -66,7 +67,7 @@ public final class UtilesValidacion {
     }
 
     // Campo de texto con DNI + Texto campo vacío
-    public static final boolean validarCampoDNI(
+    public static final boolean validarCampoDNIOld(
             JTextField txfActual, String textoCampoVacio) {
         // Texto del campo - No espaciadores
         String textoActual = txfActual.getText().trim();
@@ -90,8 +91,14 @@ public final class UtilesValidacion {
         return validacionOK;
     }
 
+    // Campo de texto con DNI + Texto campo vacío
+    public static final boolean validarCampoDNI(
+            JTextField txfActual, String textoCampoVacio) {
+        return validarCampo(txfActual, UtilesDNI.ER_DNI, textoCampoVacio);
+    }
+
     // Campo de texto con FECHA + Texto campo vacío
-    public static final boolean validarCampoFecha(
+    public static final boolean validarCampoFechaOld(
             JTextField txfActual, String textoCampoVacio) {
         // Texto del campo - No espaciadores
         String textoActual = txfActual.getText().trim();
@@ -115,8 +122,14 @@ public final class UtilesValidacion {
         return validacionOK;
     }
 
+    // Campo de texto con FECHA + Texto campo vacío
+    public static final boolean validarCampoFecha(
+            JTextField txfActual, String textoCampoVacio) {
+        return validarCampo(txfActual, UtilesFecha.ER_FECHA, textoCampoVacio);
+    }
+
     // Campo de texto con DATO + ExpReg + Texto campo vacío
-    public static final boolean validarCampoTexto(
+    public static final boolean validarCampo(
             JTextField txfActual, String expReg, String textoCampoVacio) {
         // Texto del campo - No espaciadores
         String textoActual = txfActual.getText().trim();
@@ -128,7 +141,7 @@ public final class UtilesValidacion {
         txfActual.setText(textoActual);
 
         // Valida el Dato
-        boolean validacionOK = validarDato(textoActual, expReg);
+        boolean validacionOK = UtilesValidacion.validar(textoActual, expReg);
 
         // Señala la validación
         if (validacionOK) {
@@ -144,7 +157,7 @@ public final class UtilesValidacion {
     }
 
     // Campo de texto con DATO + Lista + Texto campo vacío
-    public static final boolean validarCampoTextoLista(
+    public static final boolean validarCampo(
             JTextField txfActual, String[] lista, String textoCampoVacio) {
         // Texto del campo - No espaciadores
         String textoActual = txfActual.getText().trim();
@@ -156,7 +169,7 @@ public final class UtilesValidacion {
         txfActual.setText(textoActual);
 
         // Valida el Dato
-        boolean validacionOK = validarDatoLista(textoActual, lista);
+        boolean validacionOK = validar(textoActual, lista);
 
         // Señala la validación
         if (validacionOK) {
@@ -173,24 +186,16 @@ public final class UtilesValidacion {
 
     // Validar URL
     public static final boolean validarURL(String url) {
-        // Expresión Regular
-        final String ER = "^(https?://)?(([\\w!~*'().&=+$%-]+: )?[\\w!~*'().&=+$%-]+@)?(([0-9]{1,3}\\.){3}[0-9]{1,3}|([\\w!~*'()-]+\\.)*([\\w^-][\\w-]{0,61})?[\\w]\\.[a-z]{2,6})(:[0-9]{1,4})?((/*)|(/+[\\w!~*'().;?:@&=+$,%#-]+)+/*)$";
-
-        // Devuelve Semáforo
-        return validarDato(url, ER);
+        return validar(url, UtilesURL.ER_URL);
     }
 
     // Validar email
     public static final boolean validarEMail(String email) {
-        // Expresión Regular
-        final String ER = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*";
-
-        // Devuelve Semáforo
-        return validarDato(email, ER);
+        return validar(email, UtilesEMail.ER_EMAIL);
     }
 
     // Validar Dato < Lista Datos
-    public static final boolean validarDatoLista(String dato, String[] lista) {
+    public static final boolean validarOld(String dato, String[] lista) {
         // Semáforo Validación
         boolean validacionOK = false;
 
@@ -208,26 +213,31 @@ public final class UtilesValidacion {
             er = er.substring(0, er.lastIndexOf("|"));
 
             // Calcula Semáforo
-            validacionOK = validarDato(dato, er);
+            validacionOK = validar(dato, er);
         }
 
         // Devuelve Semáforo
         return validacionOK;
     }
 
+    public static final boolean validar(String dato, String[] lista) {
+        Arrays.sort(lista);
+        return Arrays.binarySearch(lista, dato) >= 0;
+    }
+
     // Validación Fecha - Campos Separados - Expresión Regular
-    public static final boolean validarFechaExpReg(int dia, int mes, int any) {
+    public static final boolean validarFecha(int dia, int mes, int any) {
         // Construye la fecha a partir de sus componentes
         String fecha = String.format("%02d"
                 + UtilesFecha.ER_SEP_FECHA.charAt(1) + "%02d"
                 + UtilesFecha.ER_SEP_FECHA.charAt(1) + "%d", dia, mes, any);
 
         // Devuelve la validación de la fecha
-        return UtilesValidacion.validarDato(fecha, UtilesFecha.ER_FECHA);
+        return UtilesValidacion.validar(fecha, UtilesFecha.ER_FECHA);
     }
 
     // Validación Fecha - Campos Separados - No dependencias
-    public static final boolean validarFechaNoDep(int dia, int mes, int any) {
+    public static final boolean validarFecha2(int dia, int mes, int any) {
         return dia >= 1 && dia <= 31
                 && (mes == 1 || mes == 3 || mes == 5
                 || mes == 7 || mes == 8 || mes == 10
@@ -242,7 +252,7 @@ public final class UtilesValidacion {
     }
 
     // Validación Fecha - Campos Separados
-    public static final boolean validarFecha(int dia, int mes, int any) {
+    public static final boolean validarFecha3(int dia, int mes, int any) {
         // Calcula cuantos dias tiene el mes de la fecha
         int numDias = UtilesFecha.obtenerDiasMes(mes, any);
 
@@ -256,23 +266,23 @@ public final class UtilesValidacion {
     }
 
     // Validación Fecha - Texto sin gesglosar - Expresión Regular
-    public static final boolean validarFechaExpReg(String fecha) {
-        return UtilesValidacion.validarDato(fecha, UtilesFecha.ER_FECHA);
+    public static final boolean validarFecha(String fecha) {
+        return UtilesValidacion.validar(fecha, UtilesFecha.ER_FECHA);
     }
 
     // Validación Fecha - Texto sin gesglosar
-    public static final boolean validarFecha(String fecha) {
+    public static final boolean validarFechaOld(String fecha) {
         // Extrae los componentes de la fecha
         int dia = UtilesFecha.obtenerDiaFecha(fecha);
         int mes = UtilesFecha.obtenerMesFecha(fecha);
         int any = UtilesFecha.obtenerAnyFecha(fecha);
 
         // Valida la fecha
-        return validarFecha(dia, mes, any);
+        return validarFecha3(dia, mes, any);
     }
 
     // Valida DNI - Formato texto
-    public static final boolean validarDNI(String dni) {
+    public static final boolean validarDNIOld(String dni) {
         // Semáforo de validación
         boolean dniOK = false;
 
@@ -294,6 +304,11 @@ public final class UtilesValidacion {
         return dniOK;
     }
 
+    // Valida DNI - Formato texto
+    public static final boolean validarDNI(String dni) {
+        return validar(dni, UtilesDNI.ER_DNI);
+    }
+
     // Valida DNI - Desglosado
     public static final boolean validarDNI(int num, char ctr) {
         return UtilesDNI.calcularLetraDNI(num) == ctr;
@@ -301,6 +316,6 @@ public final class UtilesValidacion {
 
     // Valida la parte del NUMERO del DNI (sin el control)
     public static final boolean validarNumeroDNI(String dato) {
-        return validarDato(dato, UtilesDNI.ER_DNI);
+        return validar(dato, UtilesDNI.ER_NUM_DNI);
     }
 }

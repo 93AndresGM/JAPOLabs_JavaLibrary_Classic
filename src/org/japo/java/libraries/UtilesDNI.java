@@ -66,7 +66,7 @@ public final class UtilesDNI {
         int numero;
 
         // Validar Formato DNI
-        if (!UtilesValidacion.validarDato(dni, ER_DNI)) {
+        if (!UtilesValidacion.validar(dni, ER_DNI)) {
             throw new Exception("ERROR: Formato de DNI incorrecto");
         }
 
@@ -110,7 +110,7 @@ public final class UtilesDNI {
     // Extraer letra del DNI
     public static final char extraerLetraDNI(String dni) throws Exception {
         // Validar Formato DNI
-        if (!UtilesValidacion.validarDato(dni, ER_DNI)) {
+        if (!UtilesValidacion.validar(dni, ER_DNI)) {
             throw new Exception("Error: Formato erróneo de DNI");
         }
 
