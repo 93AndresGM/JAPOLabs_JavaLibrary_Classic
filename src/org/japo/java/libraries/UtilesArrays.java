@@ -21,7 +21,7 @@ import java.util.Random;
  *
  * @author José A. Pacheco Ondoño - joanpaon@gmail.com
  */
-public class UtilesArrays {
+public final class UtilesArrays {
 
     // Sistema Números Aleatórios
     public static final Random RND = new Random();
@@ -128,10 +128,10 @@ public class UtilesArrays {
     public static final int buscar(int[] listaDatos, int clave) {
         // Marcador de posición
         int posicion = 0;
-        
+
         // Semáforo de Proceso de Búsqueda
         boolean finBusquedaOK = false;
-        
+
         // Proceso de búsqueda
         do {
             if (posicion >= listaDatos.length) {
@@ -143,8 +143,116 @@ public class UtilesArrays {
                 posicion++;
             }
         } while (!finBusquedaOK);
-        
+
         // Posición de la clave en el array
         return posicion;
+    }
+
+    // Ordenación - Burbuja
+    public static final void ordenarBurbuja(int[] lista) {
+        for (int i = 0; i < lista.length - 1; i++) {
+            for (int j = 0; j < lista.length - i - 1; j++) {
+                // Actual > Siguiente
+                if (lista[j] > lista[j + 1]) {
+                    // Intercambiar
+                    int aux = lista[j + 1];
+                    lista[j + 1] = lista[j];
+                    lista[j] = aux;
+                }
+            }
+        }
+    }
+
+    // Ordenación - Inserción
+    public static final void ordenarInsercion(int[] lista) {
+        for (int i = 1; i <= lista.length - 1; i++) {
+            // Elemento Actual
+            int aux = lista[i];
+
+            // Hacer Hueco a Izquierda
+            int j = i - 1;
+            while (j >= 0 && aux < lista[j]) {
+                lista[j + 1] = lista[j];
+                j = j - 1;
+            }
+
+            // Insertar Elemento Actual en Hueco
+            lista[j + 1] = aux;
+        }
+    }
+
+    // Ordenación - Selección
+    public static final void ordenarSeleccion(int[] lista) {
+        for (int i = 0; i < lista.length - 1; i++) {
+            // Posición de Mínimo
+            int pos = i;
+
+            // Seleccionar Posición de Minimo a Derecha
+            for (int j = i + 1; j < lista.length; j++) {
+                if (lista[j] < lista[pos]) {
+                    pos = j;
+                }
+            }
+
+            // Intercambiar
+            int aux = lista[i];
+            lista[i] = lista[pos];
+            lista[pos] = aux;
+        }
+    }
+
+    // Desordenar - caracter
+    public static final void desordenar(char[] lista) {
+        for (int i = 0; i < lista.length; i++) {
+            int posRnd = RND.nextInt(lista.length);
+
+            char aux = lista[posRnd];
+            lista[posRnd] = lista[i];
+            lista[i] = aux;
+        }
+    }
+
+    // Desordenar - entero
+    public static final void desordenar(int[] lista) {
+        for (int i = 0; i < lista.length; i++) {
+            int posRnd = RND.nextInt(lista.length);
+
+            int aux = lista[posRnd];
+            lista[posRnd] = lista[i];
+            lista[i] = aux;
+        }
+    }
+
+    // Desordenar - real
+    public static final void desordenar(double[] a) {
+        for (int i = 0; i < a.length; i++) {
+            int posRnd = RND.nextInt(a.length);
+
+            double aux = a[posRnd];
+            a[posRnd] = a[i];
+            a[i] = aux;
+        }
+    }
+
+    // Desordenar - boolean
+    public static final void desordenar(boolean[] a) {
+        for (int i = 0; i < a.length; i++) {
+            int posRnd = RND.nextInt(a.length);
+
+            boolean aux = a[posRnd];
+            a[posRnd] = a[i];
+            a[i] = aux;
+        }
+    }
+
+    // Desordenar - String
+    public static final void desordenar(String[] a) {
+        for (int i = 0; i < a.length; i++) {
+            int posRnd = RND.nextInt(a.length);
+
+            String aux = a[posRnd];
+            a[posRnd] = a[i];
+            a[i] = aux;
+        }
     }
 }

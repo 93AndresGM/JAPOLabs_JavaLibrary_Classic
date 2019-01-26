@@ -24,7 +24,7 @@ import java.util.GregorianCalendar;
  *
  * @author José A. Pacheco Ondoño - joanpaon@gmail.com
  */
-public class UtilesFecha {
+public final class UtilesFecha {
 
     // Nombres de los dias de la semana
     public static final String[] NOMBRE_DIA = {

@@ -23,7 +23,7 @@ import java.util.Scanner;
  */
 public class UtilesEntrada {
 
-    // Scanner --- > Entrada de acentos con Windows
+    // Scanner + Codificación Windows
     public static final Scanner SCN = new Scanner(System.in, "ISO-8859-1");
 
     // Consola >> Entero

@@ -21,7 +21,7 @@ import java.util.Random;
  *
  * @author José A. Pacheco Ondoño - joanpaon@gmail.com
  */
-public class UtilesPassword {
+public final class UtilesPassword {
 
     // Categorias de caracteres
     public static final int CAT_MIN = 0;
@@ -61,7 +61,7 @@ public class UtilesPassword {
         for (int posAct = 0; posAct < longitud; posAct++) {
             // Generar categoria
 //            int catActual = generarCategoria(longitud, posAct, minOK, mayOK, numOK, punOK);
-            int catActual = generarCategoria();
+            int catActual = generarCategoria(NUM_CAT);
 
             // Caracter actual
             char carActual;
@@ -94,6 +94,7 @@ public class UtilesPassword {
         return password;
     }
 
+    // Genera Password (min + may + num + pun)
     public static final void generarPassword(char[] pass) {
         // Manual
         pass[0] = generarCaracter(CAR_MIN_STR);
@@ -104,7 +105,7 @@ public class UtilesPassword {
         // Bucle generador
         for (int posAct = NUM_CAT; posAct < pass.length; posAct++) {
             // Generar categoria
-            int catAct = generarCategoria();
+            int catAct = generarCategoria(NUM_CAT);
 
             // Analizar categoria actual 
             switch (catAct) {
@@ -123,7 +124,7 @@ public class UtilesPassword {
         }
 
         // Desordenar Array
-        desordenar(pass);
+        UtilesArrays.desordenar(pass);
     }
 
     public static final char generarCaracter(String lista) {
@@ -134,17 +135,7 @@ public class UtilesPassword {
         return lista[RND.nextInt(lista.length)];
     }
 
-    public static final int generarCategoria() {
-        return RND.nextInt(NUM_CAT);
-    }
-
-    public static final void desordenar(char[] a) {
-        for (int i = 0; i < a.length; i++) {
-            int posRnd = RND.nextInt(a.length);
-
-            char aux = a[posRnd];
-            a[posRnd] = a[i];
-            a[i] = aux;
-        }
+    public static final int generarCategoria(int numCat) {
+        return RND.nextInt(numCat);
     }
 }

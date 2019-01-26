@@ -22,7 +22,7 @@ import java.util.Random;
  *
  * @author José A. Pacheco Ondoño - joanpaon@gmail.com
  */
-public class UtilesSorteos {
+public final class UtilesSorteos {
 
     // Referencias
     public static final int LONGITUD_BOMBO_PRIMITIVA = 49;
@@ -31,7 +31,7 @@ public class UtilesSorteos {
     // Sistema de Números Aleatorios
     public static final Random RND = new Random();
 
-    // Genera Bombo Loteria Primitiva | Inicializado 1 - 49
+    // Bombo Loteria Primitiva + Array
     public static final int[] generarBomboPrimitiva() {
         // Definir bombo
         int[] bombo = new int[LONGITUD_BOMBO_PRIMITIVA];
@@ -45,7 +45,7 @@ public class UtilesSorteos {
         return bombo;
     }
 
-    // Genera Apuesta Loteria Primitiva
+    // Apuesta Aleatoria Loteria Primitiva + Array
     public static final int[] generarApuestaPrimitiva() {
         // Definir Apuesta
         int[] apuesta = new int[LONGITUD_APUESTA_PRIMITIVA];
@@ -69,6 +69,7 @@ public class UtilesSorteos {
         return apuesta;
     }
 
+    // Apuesta Aleatoria Loteria Primitiva + ArrayList
     public static final ArrayList<Integer> generarApuestaPrimitivaList() {
         // Definir Apuesta
         ArrayList<Integer> apuesta = new ArrayList<>();
@@ -85,6 +86,7 @@ public class UtilesSorteos {
         return apuesta;
     }
 
+    // Bombo Loteria Primitiva + ArrayList
     public static final ArrayList<Integer> generarBomboPrimitivaList() {
         // Definir bombo
         ArrayList<Integer> bombo = new ArrayList<>();
@@ -96,17 +98,5 @@ public class UtilesSorteos {
 
         // Devolver Bombo
         return bombo;
-    }
-
-    public static final void ordenarBurbuja(int[] lista) {
-        for (int i = 0; i < lista.length - 1; i++) {
-            for (int j = 0; j < lista.length - i - 1; j++) {
-                if (lista[j + 1] < lista[j]) {
-                    int aux = lista[j + 1];
-                    lista[j + 1] = lista[j];
-                    lista[j] = aux;
-                }
-            }
-        }
     }
 }

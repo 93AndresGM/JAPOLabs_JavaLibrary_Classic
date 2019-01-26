@@ -21,7 +21,7 @@ import java.util.Random;
  *
  * @author José A. Pacheco Ondoño - joanpaon@gmail.com
  */
-public class UtilesDNI {
+public final class UtilesDNI {
 
     // Secuencia letras DNI
     public static final String SECUENCIA = "TRWAGMYFPDXBNJZSQVHLCKE";
@@ -87,12 +87,15 @@ public class UtilesDNI {
 
         // Proceso Normalización
         switch (numDNI.charAt(0)) {
+            case 'x':
             case 'X':
                 numDNINorm = '0' + numDNI.substring(1);
                 break;
+            case 'y':
             case 'Y':
                 numDNINorm = '1' + numDNI.substring(1);
                 break;
+            case 'z':
             case 'Z':
                 numDNINorm = '2' + numDNI.substring(1);
                 break;
@@ -105,8 +108,7 @@ public class UtilesDNI {
     }
 
     // Extraer letra del DNI
-    public static char extraerLetraDNI(String dni) throws Exception {
-
+    public static final char extraerLetraDNI(String dni) throws Exception {
         // Validar Formato DNI
         if (!UtilesValidacion.validarDato(dni, ER_DNI)) {
             throw new Exception("Error: Formato erróneo de DNI");
@@ -116,7 +118,7 @@ public class UtilesDNI {
         return dni.charAt(NUM_DIG_DNI);
     }
 
-    // Genera un DNI aleatorio
+    // Genera un DNI (Completo) aleatorio
     public static final String generarDNI() {
         // Generar Número
         int num = new Random().nextInt(NUM_MAX - NUM_MIN + 1) + NUM_MIN;
