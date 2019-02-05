@@ -28,8 +28,8 @@ public final class UtilesPassword {
     public static final int LEN_MAX_USER = 12;
 
     // Conjuntos - user
-    public static final String SET_LWR_USER = "abcdefghijklmnopqrstuvwxyz";
-    public static final String SET_UPR_USER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static final String SET_LWR_USER = "abcdeéfghiíjklmnñoópqrstuúüvwxyz";
+    public static final String SET_UPR_USER = "ABCDEÉFGHIÍJKLMNÑOÓPQRSTUÚÜVWXYZ";
     public static final String SET_DIG_USER = "0123456789";
     public static final String SET_EXT_USER = "_@#$~%&";
 
@@ -48,7 +48,7 @@ public final class UtilesPassword {
     public static final String ER_UPR_USER = String.format(".*[%s].*", SET_UPR_USER);
     public static final String ER_DIG_USER = String.format(".*[%s].*", SET_DIG_USER);
     public static final String ER_EXT_USER = String.format(".*[%s].*", SET_EXT_USER);
-    public static final String ER_USER = String.format("([%s]|[%s]|[%s]|[%s]){%d,%d}",
+    public static final String ER_SET_USER = String.format("([%s]|[%s]|[%s]|[%s]){%d,%d}",
             SET_LWR_USER, SET_UPR_USER, SET_DIG_USER, SET_EXT_USER,
             LEN_MIN_USER, LEN_MAX_USER);
 
@@ -77,7 +77,7 @@ public final class UtilesPassword {
     public static final String ER_UPR_PASS = String.format(".*[%s].*", SET_UPR_PASS);
     public static final String ER_DIG_PASS = String.format(".*[%s].*", SET_DIG_PASS);
     public static final String ER_EXT_PASS = String.format(".*[%s].*", SET_EXT_PASS);
-    public static final String ER_PASS = String.format("([%s]|[%s]|[%s]|[%s]){%d,%d}",
+    public static final String ER_SET_PASS = String.format("([%s]|[%s]|[%s]|[%s]){%d,%d}",
             SET_LWR_PASS, SET_UPR_PASS, SET_DIG_PASS, SET_EXT_PASS,
             LEN_MIN_PASS, LEN_MAX_PASS);
 
