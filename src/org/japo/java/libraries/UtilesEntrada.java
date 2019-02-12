@@ -15,6 +15,11 @@
  */
 package org.japo.java.libraries;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -23,8 +28,17 @@ import java.util.Scanner;
  */
 public class UtilesEntrada {
 
+    // Formatos Fecha
+    public static final String FORMATO_FECHA01 = "dd/MM/yyyy";
+
+    // Formatos Hora
+    public static final String FORMATO_HORA01 = "hh:mm:ss";
+
     // Scanner + Codificación Windows
     public static final Scanner SCN = new Scanner(System.in, "ISO-8859-1");
+
+    // Locale Spanish
+    public static final Locale LCL = new Locale("es", "ES");
 
     // Consola >> Entero
     public static final int leerEntero(String msgUsr, String msgErr) {
@@ -264,5 +278,51 @@ public class UtilesEntrada {
     public static final String leerTexto(String msgUsr) {
         System.out.print(msgUsr);
         return SCN.nextLine();
+    }
+
+    // Consola >> Calendar
+    public static final Calendar leerDatoTemporal(
+            String patron, Locale locale, String msgUsr, String msgErr) {
+        // Formateador
+        SimpleDateFormat sdf = new SimpleDateFormat(patron, locale);
+
+        // Referencia Calendar
+        Calendar calendar = null;
+
+        // Intro + Parse
+        try {
+            // Consola >> Dato (Texto)
+            String texto = leerTexto(msgUsr);
+
+            // Texto >> Date
+            Date date = sdf.parse(texto);
+
+            // Instancia Objeto Calendar
+            calendar = Calendar.getInstance();
+
+            // Date >> Calendar
+            calendar.setTime(date);
+        } catch (ParseException e) {
+            System.out.println(msgErr);
+        }
+
+        // Devuelve Calendar
+        return calendar;
+    }
+
+    // Consola >> Calendar (Locale ESP)
+    public static final Calendar leerDatoTemporal(
+            String patron, String msgUsr, String msgErr) {
+        return leerDatoTemporal(patron, LCL, msgUsr, msgErr);
+    }
+
+    // Consola >> Fecha
+    public static final Calendar leerFecha(String msgUsr, String msgErr) {
+        return leerDatoTemporal(FORMATO_FECHA01, msgUsr, msgErr);
+    }
+
+    // Consola >> Hora
+    public static final Calendar leerHora(String msgUsr, String msgErr) {
+        return leerDatoTemporal(FORMATO_HORA01, msgUsr, msgErr);
     }
 }
