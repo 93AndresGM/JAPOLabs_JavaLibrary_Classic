@@ -71,25 +71,35 @@ public class UtilesCSV {
     }
 
     // Array String > Secuencia String
-    public static final String convertir(String[] items) {
+    public static final String convertir(String[] items, String separador) {
         // Acumulador
         StringBuilder sb = new StringBuilder();
 
         // Primer item por separado
         sb.append(items[0]);
 
-            // Resto de los items
-            for (int i = 1; i < items.length; i++) {
-            sb.append(UtilesCSV.SEPARADOR_ESCRITURA);
+        // Resto de los items
+        for (int i = 1; i < items.length; i++) {
+            sb.append(separador);
             sb.append(items[i]);
-            }
+        }
 
         // Devuelve Secuencia
         return sb.toString();
-        }
+    }
+
+    // Array String > Secuencia String - Separador Predeterminado
+    public static final String convertir(String[] items) {
+        return convertir(items, SEPARADOR_ESCRITURA);
+    }
 
     // Secuencia String > Array String
+    public static final String[] convertir(String secuencia, String separador) {
+        return secuencia.split(separador);
+    }
+
+    // Secuencia String > Array String - Separador Predeterminado
     public static final String[] convertir(String secuencia) {
-        return secuencia.split(SEPARADOR_LECTURA);
+        return convertir(secuencia, SEPARADOR_LECTURA);
     }
 }
